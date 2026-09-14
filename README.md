@@ -1,63 +1,100 @@
-# Perpustakaan Mobile 📱
+# Pengaduan Mobile 📢📱
 
-Aplikasi mobile untuk manajemen perpustakaan yang dibangun dengan [Expo](https://expo.dev).
-
-## Deskripsi
-
-Ini adalah proyek [Expo](https://expo.dev) yang dibuat dengan [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Memulai
-
-### 1. Install Dependencies
-
-```bash
-npm install
-```
-
-### 2. Jalankan Aplikasi
-
-```bash
-npx expo start
-```
-
-Dalam output, Anda akan menemukan opsi untuk membuka aplikasi di:
-
-- [Development Build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go) - Sandbox terbatas untuk mencoba pengembangan dengan Expo
-
-## Pengembangan
-
-Mulai mengembangkan dengan mengedit file di dalam direktori **app**. Proyek ini menggunakan [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Reset Proyek
-
-Ketika siap untuk memulai dari nol, jalankan:
-
-```bash
-npm run reset-project
-```
-
-Perintah ini akan memindahkan kode starter ke direktori **app-example** dan membuat direktori **app** kosong untuk mulai mengembangkan.
-
-## Setup Tambahan
-
-- **ESLint**: Jalankan `npx expo lint` atau ikuti [panduan "Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- **Unit Testing**: Ikuti [panduan "Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- **TypeScript**: Pelajari lebih lanjut di [panduan "Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Pelajari Lebih Lanjut
-
-- [Dokumentasi Expo](https://docs.expo.dev/) - Pelajari fundamental atau topik lanjutan
-- [Expo Tutorial](https://docs.expo.dev/tutorial/introduction/) - Tutorial langkah demi langkah untuk membuat aplikasi Android, iOS, dan web
-- [GitHub Expo](https://github.com/expo/expo) - Lihat platform open source dan berkontribusi
-- [Discord Community](https://chat.expo.dev) - Chat dengan pengguna Expo lainnya
-
-## Bergabung dengan Komunitas
-
-Bergabunglah dengan komunitas developer yang membuat aplikasi universal.
+Aplikasi Mobile **Sistem Aspirasi & Pengaduan Masyarakat (SAS)** yang dibangun menggunakan **[Expo](https://expo.dev)** dan **React Native** dengan **Expo Router**.
 
 ---
 
-**Made with ❤️ using Expo**
+## 📌 Deskripsi
+
+Aplikasi **Pengaduan Mobile** ini dirancang untuk memudahkan masyarakat/pengguna dalam menyampaikan aspirasi, pengaduan, dan keluhan secara cepat, efisien, dan transparan. Aplikasi ini dilengkapi dengan dukungan mode penyimpanan lokal (Offline Mock) serta pengintegrasian ke Server Backend REST API.
+
+---
+
+## ✨ Fitur Utama
+
+- 🔐 **Autentikasi Pengguna**: Login & Registrasi Akun Masyarakat.
+- 📝 **Buat Laporan / Aspirasi**: Form pengiriman laporan disertai judul, kategori, deskripsi, lokasi, dan opsi foto/lampiran.
+- 📋 **Daftar Laporan**: Melihat daftar riwayat pengaduan beserta status tindak lanjut (Pending, Diproses, Selesai, Ditolak).
+- 🔍 **Detail Laporan & Tanggapan**: Melihat rincian pengaduan lengkap beserta balasan/tanggapan dari petugas.
+- 👤 **Profil Pengguna**: Manajemen profil pengguna dan riwayat akun.
+- 🌐 **Offline / Online API Switch**: Mendukung penyimpanan lokal `AsyncStorage` serta sinkronisasi ke REST API backend.
+
+---
+
+## 🛠️ Persyaratan Sistem
+
+Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
+
+- **Node.js** (versi LTS disarankan)
+- **npm** atau **yarn**
+- **Expo Go** (Aplikasi di Play Store / App Store untuk pengujian di smartphone)
+- *(Opsional)* **Android Studio** / **Xcode** untuk emulator/simulator.
+
+---
+
+## 🚀 Cara Menjalankan
+
+### 1. Clone & Install Dependencies
+```bash
+git clone https://github.com/Rizqinus/Perpustakaan-Mobile.git
+cd Perpustakaan-Mobile
+npm install
+```
+
+### 2. Jalankan Server Expo
+```bash
+npx expo start
+# atau
+npm start
+```
+
+### 3. Buka Aplikasi
+- **HP Fisik**: Buka aplikasi **Expo Go**, scan **QR Code** yang tampil di terminal.
+- **Android Emulator**: Tekan `a` pada terminal.
+- **iOS Simulator**: Tekan `i` pada terminal.
+- **Web Browser**: Tekan `w` pada terminal.
+
+---
+
+## ⚙️ Konfigurasi Backend API
+
+Secara bawaan, aplikasi akan menggunakan mode offline (Mock Storage). Jika ingin menghubungkan ke backend server:
+
+Buka file [`src/services/api.ts`](file:///e:/Data/Documents/11_RPL_2/Semester_2\PM\Project\SAS\mobile\src\services\api.ts) dan atur URL backend Anda:
+
+```typescript
+// Ganti dengan IP lokal komputer Anda jika menguji dengan HP fisik
+const BASE_URL = 'http://192.168.x.x:8000/api';
+```
+
+---
+
+## 📁 Struktur Direktori
+
+```text
+mobile/
+├── src/
+│   ├── app/                # Route & Halaman Aplikasi (Expo Router)
+│   │   ├── index.tsx       # Halaman Utama / Home
+│   │   ├── login.tsx       # Halaman Login
+│   │   ├── register.tsx    # Halaman Register
+│   │   ├── lapor.tsx       # Form Pengaduan Baru
+│   │   ├── laporan-list.tsx# List Pengaduan
+│   │   ├── detail.tsx      # Detail Pengaduan & Tanggapan
+│   │   └── profil.tsx      # Halaman Profil
+│   ├── context/            # Global State (Auth Context)
+│   ├── services/           # Service API & Local Storage
+│   └── types.ts            # TypeScript Interfaces & Types
+├── assets/                 # Gambar & Icon Aplikasi
+├── app.json                # Konfigurasi Expo Project
+└── README.md
+```
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dibuat untuk keperluan penguji / pengembangan Sistem Aspirasi & Pengaduan Masyarakat.
+
+**Made with ❤️ using Expo Router**
+
